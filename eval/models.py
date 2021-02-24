@@ -5,12 +5,16 @@ class TrainingSession(models.Model):
     date = models.DateField()
     description = models.TextField()
     students = models.ManyToManyField("Student", blank=True)
+    case_study_group_size = models.IntegerField(default=2)
 
 
 class Student(models.Model):
     firstname = models.TextField()
     lastname = models.TextField()
     mail = models.EmailField()
+
+    def __str__(self):
+        return f'{self.firstname} {self.lastname.upper()}'
 
 
 class Skill(models.Model):
@@ -19,8 +23,12 @@ class Skill(models.Model):
     order = models.IntegerField()
     parent = models.ForeignKey("Skill", on_delete=models.CASCADE, blank=True, null=True)
 
+    def __str__(self):
+        return f'{self.order}. {self.description}'
+
 
 class CaseStudy(models.Model):
+    training_session = models.ForeignKey(TrainingSession, on_delete=models.CASCADE)
     date = models.DateField()
     subject = models.TextField()
     evaluator = models.TextField()  # TODO: change to user and One-to-Many
@@ -28,8 +36,8 @@ class CaseStudy(models.Model):
 
 
 class Evaluation(models.Model):
-    student = models.ForeignKey(CaseStudy, on_delete=models.CASCADE)
-    case_study = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    case_study = models.ForeignKey(CaseStudy, on_delete=models.CASCADE)
     comment = models.TextField(blank=True)
     skills = models.ManyToManyField(Skill, through="SkillEvaluation")
 
