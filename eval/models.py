@@ -17,7 +17,7 @@ class Skill(models.Model):
     training_session = models.ForeignKey("TrainingSession", on_delete=models.CASCADE)
     description = models.TextField()
     order = models.IntegerField()
-    parent = models.ForeignKey("Skill", on_delete=models.CASCADE, blank=True)
+    parent = models.ForeignKey("Skill", on_delete=models.CASCADE, blank=True, null=True)
 
 
 class CaseStudy(models.Model):
