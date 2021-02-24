@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Session(models.Model):
+class TrainingSession(models.Model):
     date = models.DateField()
     description = models.TextField()
     students = models.ManyToManyField("Student")
@@ -14,7 +14,7 @@ class Student(models.Model):
 
 
 class Skill(models.Model):
-    session = models.ForeignKey("Session", on_delete=models.CASCADE)
+    training_session = models.ForeignKey("TrainingSession", on_delete=models.CASCADE)
     description = models.TextField()
     order = models.IntegerField()
     parent = models.ForeignKey("Skill", on_delete=models.CASCADE)
