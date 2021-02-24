@@ -4,7 +4,7 @@ from django.db import models
 class TrainingSession(models.Model):
     date = models.DateField()
     description = models.TextField()
-    students = models.ManyToManyField("Student")
+    students = models.ManyToManyField("Student", blank=True)
 
 
 class Student(models.Model):
@@ -17,11 +17,12 @@ class Skill(models.Model):
     training_session = models.ForeignKey("TrainingSession", on_delete=models.CASCADE)
     description = models.TextField()
     order = models.IntegerField()
-    parent = models.ForeignKey("Skill", on_delete=models.CASCADE)
+    parent = models.ForeignKey("Skill", on_delete=models.CASCADE, blank=True)
 
 
 class CaseStudy(models.Model):
     date = models.DateField()
+    subject = models.TextField()
     evaluator = models.TextField()  # TODO: change to user and One-to-Many
     students = models.ManyToManyField(Student, through="Evaluation")
 
@@ -29,7 +30,7 @@ class CaseStudy(models.Model):
 class Evaluation(models.Model):
     student = models.ForeignKey(CaseStudy, on_delete=models.CASCADE)
     case_study = models.ForeignKey(Student, on_delete=models.CASCADE)
-    comment = models.TextField()
+    comment = models.TextField(blank=True)
     skills = models.ManyToManyField(Skill, through="SkillEvaluation")
 
 
