@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-25 22:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: eval/models.py:13
+msgid "training session"
+msgstr "session de formation"
+
+#: eval/models.py:14
+msgid "training sessions"
+msgstr "Sessions de formation"
+
+#: eval/models.py:26
+msgid "student"
+msgstr "apprenant"
+
+#: eval/models.py:27
+msgid "students"
+msgstr "apprenants"
+
+#: eval/models.py:45
+msgid ""
+"Cannot change skills when there are already case studies in the training "
+"session"
+msgstr ""
+"Impossible de modifier les compétences lorsqu'il y a déjà des cas concrets "
+"dans la session"
+
+#: eval/models.py:54
+msgid "skill"
+msgstr "compétence"
+
+#: eval/models.py:55
+msgid "skills"
+msgstr "compétences"
+
+#: eval/models.py:68
+msgid "case study"
+msgstr "cas concret"
+
+#: eval/models.py:69
+msgid "case studies"
+msgstr "cas concret"
+
+#: eval/models.py:91
+msgid "evaluation"
+msgstr "évaluation"
+
+#: eval/models.py:92
+msgid "evaluations"
+msgstr "évaluations"

@@ -9,6 +9,10 @@ class TrainingSession(models.Model):
     students = models.ManyToManyField("Student", blank=True)
     case_study_group_size = models.IntegerField(default=2)
 
+    class Meta:
+        verbose_name = _("training session")
+        verbose_name_plural = _("training sessions")
+
 
 class Student(models.Model):
     firstname = models.TextField()
@@ -17,6 +21,10 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.firstname} {self.lastname.upper()}"
+
+    class Meta:
+        verbose_name = _("student")
+        verbose_name_plural = _("students")
 
 
 class Skill(models.Model):
@@ -42,6 +50,10 @@ class Skill(models.Model):
     def __str__(self):
         return f"{self.order}. {self.description}"
 
+    class Meta:
+        verbose_name = _("skill")
+        verbose_name_plural = _("skills")
+
 
 class CaseStudy(models.Model):
     training_session = models.ForeignKey(
@@ -51,6 +63,10 @@ class CaseStudy(models.Model):
     subject = models.TextField()
     evaluator = models.TextField()  # TODO: change to user and One-to-Many
     students = models.ManyToManyField(Student, through="Evaluation")
+
+    class Meta:
+        verbose_name = _("case study")
+        verbose_name_plural = _("case studies")
 
 
 class Evaluation(models.Model):
@@ -70,6 +86,10 @@ class Evaluation(models.Model):
             for session_skill in self.case_study.training_session.skills.all():
                 skill_evaluation = SkillEvaluation(skill=session_skill, evaluation=self)
                 skill_evaluation.save()
+
+    class Meta:
+        verbose_name = _("evaluation")
+        verbose_name_plural = _("evaluations")
 
 
 class SkillEvaluation(models.Model):
