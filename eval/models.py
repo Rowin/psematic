@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class TrainingSession(models.Model):
@@ -25,12 +27,26 @@ class Skill(models.Model):
     order = models.IntegerField()
     parent = models.ForeignKey("Skill", on_delete=models.CASCADE, blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    def full_clean(self, exclude=None, validate_unique=True):
+        if self.training_session.case_studies.count() > 0:
+            raise ValidationError(
+                _(
+                    "Cannot change skills when there are already case studies in the training session"
+                )
+            )
+        return super().full_clean(exclude=exclude, validate_unique=validate_unique)
+
     def __str__(self):
         return f"{self.order}. {self.description}"
 
 
 class CaseStudy(models.Model):
-    training_session = models.ForeignKey(TrainingSession, on_delete=models.CASCADE)
+    training_session = models.ForeignKey(
+        TrainingSession, on_delete=models.CASCADE, related_name="case_studies"
+    )
     date = models.DateField()
     subject = models.TextField()
     evaluator = models.TextField()  # TODO: change to user and One-to-Many
